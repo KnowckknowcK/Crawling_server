@@ -5,8 +5,9 @@ import time
 
 app = FastAPI()
 
-@app.get("/",)
-async def post_articles():
+@app.get("/")
+def post_articles():
     
     process = CrawlerProcess(get_project_settings())
     process.crawl('url_crawler')
+    process.start()
