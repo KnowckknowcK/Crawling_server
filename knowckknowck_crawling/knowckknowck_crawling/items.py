@@ -13,7 +13,7 @@ class KnowckknowckCrawlingItem(scrapy.Item):
     content = scrapy.Field()
     created_at = scrapy.Field()
     original_url = scrapy.Field()
-    pass
+    
 
 class Article(scrapy.Item):
     title = scrapy.Field()
