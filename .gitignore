@@ -1,1 +1,6 @@
 venv
+.env
+__pycache__
+knowckknowck_crawling/__pycache__
+knowckknowck_crawling/knowckknowck_crawling/__pycache__
+knowckknowck_crawling/knowckknowck_crawling/spiders/__pycache__
