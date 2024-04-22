@@ -1,4 +1,4 @@
-venv
+crawling_venv
 .env
 __pycache__
 knowckknowck_crawling/__pycache__
