@@ -43,5 +43,5 @@ python3 -m api >> ../../crawling.log &
 |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
 |  |  |  |  |
 *  *  *  *  * user-name command to be executed
-0  2  0  0  0 /home/ubuntu/deploy.sh
+0  2  *  *  * /home/ubuntu/deploy.sh
 ```
