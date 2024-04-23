@@ -14,10 +14,10 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path='../.env',
             verbose=True)
 
-HOST = os.getenv("HOST")
-USER = os.getenv("USER")
-PASSWORD = os.getenv("PASSWORD")
-DATABASE = os.getenv("DATABASE")
+HOST = os.getenv("DB_HOST")
+USER = os.getenv("DB_USER")
+PASSWORD = os.getenv("DB_PASSWORD")
+DATABASE = os.getenv("DB_SCHEMA")
 
 
 class KnowckknowckDataPipeline:
