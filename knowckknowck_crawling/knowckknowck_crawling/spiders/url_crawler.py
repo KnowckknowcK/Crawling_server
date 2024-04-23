@@ -3,6 +3,7 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from knowckknowck_crawling.items import Article
 from bs4 import BeautifulSoup as bs
+from datetime import datetime
 
 
 
@@ -25,6 +26,9 @@ class CrawlerSpider(CrawlSpider):
 
 
     def start_requests(self):
+        print()
+        print()
+        print("****************** ",datetime.now()," ******************")
         for id in categories.keys():
             yield scrapy.Request("https://news.naver.com/section/"+id ,self.url_parse)
         
@@ -43,7 +47,6 @@ class CrawlerSpider(CrawlSpider):
     def content_parse(self, response):
         item = Article()
         item['original_url']=response._get_url()
-        print("10"+response._get_url()[-1])
         item['category']=categories["10"+response._get_url()[-1]]
         item['title']=response.xpath('//div[@class="media_end_head_title"]/h2/span/text()').get()
         item['created_at']=response.xpath('//div[@class="media_end_head_info_datestamp"]//span/@data-date-time').get()
