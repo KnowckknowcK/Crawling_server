@@ -18,7 +18,8 @@ pip install -r requirements.txt
 cd knowckknowck_crawling
 
 # 실행
-python -m api
+python -m naver_crawler
+python -m rss_crawler
 ```
 
 ### vm 실행방법
@@ -27,11 +28,13 @@ python -m api
 cd ~/Crawling_server/knowckknowck_crawling
 
 # 실행
-python3 -m api >> ../../crawling.log &
+python3 -m naver_crawler >> ../../naver_crawling.log &
+python3 -m rss_crawler >> ../../rss_crawling.log &
 ```
 ```powershell
 # 홈 경로에 실행 스크립트 위치
-./deploy.sh
+./execute_crawler_1.sh
+./execute_crawler_2.sh
 ```
 
 ## Crontab 설정
@@ -43,5 +46,6 @@ python3 -m api >> ../../crawling.log &
 |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
 |  |  |  |  |
 *  *  *  *  * user-name command to be executed
-0  2  *  *  * /home/ubuntu/deploy.sh
+0  2  *  *  * /home/ubuntu/execute_crawler_1.sh
+0  3  *  *  * /home/ubuntu/execute_crawler_2.sh
 ```
