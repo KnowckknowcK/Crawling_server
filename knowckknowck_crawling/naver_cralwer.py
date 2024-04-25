@@ -3,10 +3,10 @@ from scrapy.utils.project import get_project_settings
 import time
 
 
-def api():
+def excute():
     process = CrawlerProcess(get_project_settings())
-    process.crawl('url_crawler')
+    process.crawl('naver_news_crawler')
     process.start()
 
 if __name__=='__main__':
-    api()
+    excute()
