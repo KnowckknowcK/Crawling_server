@@ -9,15 +9,19 @@ from datetime import datetime
 
 
 categories = {"30300018":"ECONOMICS",
+              "50200011":"ECONOMICS",
               "30200030":"POLITICS",
               "50400012":"SOCIAL",
+              "30300018":"WORLD",
+              "30000023":"ENTERTAINMENT",
+              "71000001":"SPORT",
               }
 
 
 class CrawlerSpider(CrawlSpider):
     name = "rss_crawler"
     allowed_domains = ["www.mk.co.kr"]
-    start_urls = ["https://www.mk.co.kr/rss"]
+    start_urls = ["https://www.mk.co.kr/rss/"]
 
 
 
@@ -32,7 +36,7 @@ class CrawlerSpider(CrawlSpider):
         feed_url = response._get_url()
         feed_list = feeds.find_feed_urls(feed_url)
         
-        for feed in feed_list:
+        for feed in feed_list[:2]:
             yield scrapy.Request(feed,
                                  self.content_parse,
                                  meta={'category':feed_url[-8:]})
@@ -55,6 +59,7 @@ class CrawlerSpider(CrawlSpider):
         html = fetch_url(feed)
         text = extract(html)
         item['content']=text
+
 
         yield item
 

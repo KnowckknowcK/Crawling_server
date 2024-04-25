@@ -7,16 +7,16 @@ from datetime import datetime
 
 
 
-categories = {"101":"ECONOMICS",
-              "100":"POLITICS",
+categories = {"100":"POLITICS",
+              "101":"ECONOMICS",
               "102":"SOCIAL",
-              "103":"ECONOMICS",
-              "104":"ECONOMICS",
+              "103":"CULTURE",
+              "104":"WORLD",
               "105":"IT",
-              "106":"IT",
-              "107":"IT",
-              "108":"IT",
-              "109":"IT"}
+              "106":"ENTERTAINMENT",
+              "107":"SPORT",
+              "108":"SOCIAL",
+              "109":"SOCIAL"}
 
 
 class CrawlerSpider(CrawlSpider):
