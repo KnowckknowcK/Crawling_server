@@ -14,19 +14,19 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path='../.env',
             verbose=True)
 
-HOST = os.getenv("DB_HOST")
-USER = os.getenv("DB_USER")
-PASSWORD = os.getenv("DB_PASSWORD")
-DATABASE = os.getenv("DB_SCHEMA")
+DB_HOST = os.getenv("DB_HOST")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_SCHEMA = os.getenv("DB_SCHEMA")
 
 
 class KnowckknowckDataPipeline:
     def __init__(self):
         self.conn = mysql.connector.connect(
-            host = HOST,
-            user = USER,
-            password = PASSWORD,
-            database = DATABASE
+            host = DB_HOST,
+            user = DB_USER,
+            password = DB_PASSWORD,
+            database = DB_SCHEMA
         )
         self.cur = self.conn.cursor()
 
