@@ -20,7 +20,7 @@ categories = {"101":"ECONOMICS",
 
 
 class CrawlerSpider(CrawlSpider):
-    name = "url_crawler"
+    name = "naver_news_crawler"
     allowed_domains = ["news.naver.com"]
     start_urls = ["https://news.naver.com/section/102"]
 
