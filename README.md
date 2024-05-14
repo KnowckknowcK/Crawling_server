@@ -28,8 +28,8 @@ python -m rss_crawler
 cd ~/Crawling_server/knowckknowck_crawling
 
 # 실행
-python3 -m naver_crawler >> ../../naver_crawling.log &
-python3 -m rss_crawler >> ../../rss_crawling.log &
+python3 -m naver_crawler &
+python3 -m rss_crawler &
 ```
 ```powershell
 # 홈 경로에 실행 스크립트 위치
