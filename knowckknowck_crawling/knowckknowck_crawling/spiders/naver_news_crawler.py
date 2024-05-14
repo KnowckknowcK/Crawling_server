@@ -51,8 +51,12 @@ class CrawlerSpider(CrawlSpider):
         item = Article()
         item['original_url']=response._get_url()
         item['category']=categories["10"+response._get_url()[-1]]
-        item['title']=response.xpath('//div[@class="media_end_head_title"]/h2/span/text()').get()
         item['created_at']=response.xpath('//div[@class="media_end_head_info_datestamp"]//span/@data-date-time').get()
+
+        title = response.xpath('//div[@class="media_end_head_title"]/h2/span/text()').get()
+        title = title.replace("\'","").replace("\""," ").replace("..."," ").replace("…"," ").replace("’"," ").replace("‘"," ").replace("”"," ").replace("“"," ")
+        item['title']=title
+        
         
         pre_content = response.xpath('//article[@class="go_trans _article_content"]').get()
         content = bs(pre_content, 'html.parser')

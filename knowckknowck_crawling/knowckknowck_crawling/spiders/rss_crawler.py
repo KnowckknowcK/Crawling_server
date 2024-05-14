@@ -42,7 +42,7 @@ class CrawlerSpider(CrawlSpider):
         feed_url = response._get_url()
         feed_list = feeds.find_feed_urls(feed_url)
         
-        for feed in feed_list[:3]:
+        for feed in feed_list[:1]:
             logger2.info(feed)
             yield scrapy.Request(feed,
                                  self.content_parse,
@@ -60,6 +60,7 @@ class CrawlerSpider(CrawlSpider):
         created_at = response.xpath('//div[@class="time_area"]//dd/text()').get()
         title = response.xpath('//div[@class="txt_area"]/h2[@class="news_ttl"]/text()').get()
         item['created_at']=created_at
+        title = title.replace("\'","").replace("\""," ").replace("..."," ").replace("…"," ").replace("’"," ").replace("‘"," ").replace("”"," ").replace("“"," ")
         item['title']=title
         
         
