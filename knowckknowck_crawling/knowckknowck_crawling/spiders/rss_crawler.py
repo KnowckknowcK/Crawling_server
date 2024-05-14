@@ -5,6 +5,7 @@ from knowckknowck_crawling.items import Article
 from bs4 import BeautifulSoup as bs
 from trafilatura import feeds, fetch_url, extract
 from datetime import datetime
+import logging
 
 
 
@@ -17,6 +18,11 @@ categories = {"30300018":"ECONOMICS",
               "71000001":"SPORT",
               }
 
+
+logging.basicConfig(filename="../../crawling.log", level=logging.DEBUG, 
+                    format="[ %(asctime)s | %(levelname)s ] %(message)s", 
+                    datefmt="%Y-%m-%d %H:%M:%S")
+logger2 = logging.getLogger()
 
 class CrawlerSpider(CrawlSpider):
     name = "rss_crawler"
@@ -36,7 +42,8 @@ class CrawlerSpider(CrawlSpider):
         feed_url = response._get_url()
         feed_list = feeds.find_feed_urls(feed_url)
         
-        for feed in feed_list[:2]:
+        for feed in feed_list[:1]:
+            logger2.info(feed)
             yield scrapy.Request(feed,
                                  self.content_parse,
                                  meta={'category':feed_url[-8:]})
@@ -53,6 +60,7 @@ class CrawlerSpider(CrawlSpider):
         created_at = response.xpath('//div[@class="time_area"]//dd/text()').get()
         title = response.xpath('//div[@class="txt_area"]/h2[@class="news_ttl"]/text()').get()
         item['created_at']=created_at
+        title = title.replace("\'","").replace("\""," ").replace("..."," ").replace("…"," ").replace("’"," ").replace("‘"," ").replace("”"," ").replace("“"," ")
         item['title']=title
         
         
