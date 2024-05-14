@@ -4,6 +4,7 @@ from scrapy.spiders import CrawlSpider, Rule
 from knowckknowck_crawling.items import Article
 from bs4 import BeautifulSoup as bs
 from datetime import datetime
+import logging
 
 
 
@@ -19,6 +20,11 @@ categories = {"100":"POLITICS",
               "109":"SOCIAL"}
 
 
+logging.basicConfig(filename="../../crawling.log", level=logging.DEBUG, 
+                    format="[ %(asctime)s | %(levelname)s ] %(message)s", 
+                    datefmt="%Y-%m-%d %H:%M:%S")
+logger = logging.getLogger()
+
 class CrawlerSpider(CrawlSpider):
     name = "naver_news_crawler"
     allowed_domains = ["news.naver.com"]
@@ -26,9 +32,6 @@ class CrawlerSpider(CrawlSpider):
 
 
     def start_requests(self):
-        print()
-        print()
-        print("****************** ",datetime.now()," ******************")
         for id in categories.keys():
             yield scrapy.Request("https://news.naver.com/section/"+id ,self.url_parse)
         
@@ -38,7 +41,7 @@ class CrawlerSpider(CrawlSpider):
         columns = response.xpath('//div[@class="section_article as_headline _TEMPLATE"]/ul/li//*[@class="sa_text"]/a/@href')
         
         for column in  columns :
-            print(column.get())
+            logger.info(column.get())
             yield scrapy.Request(column.get(),self.content_parse)
 
 
