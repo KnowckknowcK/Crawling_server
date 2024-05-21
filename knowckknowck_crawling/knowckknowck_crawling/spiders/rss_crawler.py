@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup as bs
 from trafilatura import feeds, fetch_url, extract
 from datetime import datetime
 import logging
+import re
 
 
 
@@ -58,10 +59,13 @@ class CrawlerSpider(CrawlSpider):
         item['category']=categories[response.meta['category']]
         
         created_at = response.xpath('//div[@class="time_area"]//dd/text()').get()
-        title = response.xpath('//div[@class="txt_area"]/h2[@class="news_ttl"]/text()').get()
         item['created_at']=created_at
-        title = title.replace("\'","").replace("\"","").replace("...","").replace("…","").replace("’","").replace("‘","").replace("”","").replace("“","")
-        item['title']=title
+
+        pre_title = response.xpath('//div[@class="txt_area"]/h2[@class="news_ttl"]/text()').get()
+        pre_title = pre_title.replace("\'","").replace("\"","").replace("...","").replace("…","").replace("’","").replace("‘","").replace("”","").replace("“","")
+        pattern = r'\[[^]]*\]'
+        title = re.sub(pattern=pattern, repl='', string=pre_title)    
+        item['title']=title if title[0]!=' ' else title[1:]
         
         
         html = fetch_url(feed)
