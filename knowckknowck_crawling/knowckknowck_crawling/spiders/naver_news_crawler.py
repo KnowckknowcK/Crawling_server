@@ -5,6 +5,7 @@ from knowckknowck_crawling.items import Article
 from bs4 import BeautifulSoup as bs
 from datetime import datetime
 import logging
+import re
 
 
 
@@ -42,7 +43,9 @@ class CrawlerSpider(CrawlSpider):
         
         for column in  columns :
             logger.info(column.get())
-            yield scrapy.Request(column.get(),self.content_parse)
+            yield scrapy.Request(column.get(),
+                                 self.content_parse,
+                                 meta={'category':response._get_url()[-3:]})
 
 
 
@@ -50,13 +53,14 @@ class CrawlerSpider(CrawlSpider):
     def content_parse(self, response):
         item = Article()
         item['original_url']=response._get_url()
-        item['category']=categories["10"+response._get_url()[-1]]
+        item['category']=categories[response.meta['category']]
         item['created_at']=response.xpath('//div[@class="media_end_head_info_datestamp"]//span/@data-date-time').get()
 
-        title = response.xpath('//div[@class="media_end_head_title"]/h2/span/text()').get()
-        title = title.replace("\'","").replace("\""," ").replace("..."," ").replace("…"," ").replace("’"," ").replace("‘"," ").replace("”"," ").replace("“"," ")
-        item['title']=title
-        
+        pre_title = response.xpath('//div[@class="media_end_head_title"]/h2/span/text()').get()
+        pre_title = pre_title.replace("\'","").replace("\"","").replace("..."," ").replace("…"," ").replace("’","").replace("‘","").replace("”","").replace("“","")
+        pattern = r'\[[^]]*\]'
+        title = re.sub(pattern=pattern, repl='', string=pre_title)    
+        item['title']=title if title[0]!=' ' else title[1:]
         
         pre_content = response.xpath('//article[@class="go_trans _article_content"]').get()
         content = bs(pre_content, 'html.parser')
