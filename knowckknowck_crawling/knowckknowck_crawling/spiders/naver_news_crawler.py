@@ -52,7 +52,9 @@ class CrawlerSpider(CrawlSpider):
 
     def content_parse(self, response):
         item = Article()
-        item['original_url']=response._get_url()
+        url = response._get_url()
+        item['id']=int(url[-14:].replace("/",""))
+        item['original_url']=url
         item['category']=categories[response.meta['category']]
         item['created_at']=response.xpath('//div[@class="media_end_head_info_datestamp"]//span/@data-date-time').get()
 

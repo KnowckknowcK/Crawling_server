@@ -9,6 +9,7 @@ import scrapy
 class KnowckknowckCrawlingItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    id = scrapy.Field()
     title = scrapy.Field()
     content = scrapy.Field()
     created_at = scrapy.Field()
@@ -17,6 +18,7 @@ class KnowckknowckCrawlingItem(scrapy.Item):
     
 
 class Article(scrapy.Item):
+    id = scrapy.Field()
     title = scrapy.Field()
     content = scrapy.Field()
     created_at = scrapy.Field()
