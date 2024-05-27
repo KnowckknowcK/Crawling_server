@@ -55,6 +55,7 @@ class CrawlerSpider(CrawlSpider):
         item = Article()
 
         feed = response._get_url()
+        item['id']=int(feed[-8:])
         item['original_url']=feed
         item['category']=categories[response.meta['category']]
         
