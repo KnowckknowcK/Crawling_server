@@ -31,7 +31,8 @@ class KnowckknowckDataPipeline:
         self.cur = self.conn.cursor()
 
     def process_item(self,item,spider):
-        self.cur.execute(""" insert into article (created_time,article_url,category,title,content) values (%s,%s,%s,%s,%s)""", (
+        self.cur.execute(""" insert into article (id,created_time,article_url,category,title,content) values (%s,%s,%s,%s,%s,%s)""", (
+            item["id"],
             item["created_at"],
             item["original_url"],
             item["category"],
