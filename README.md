@@ -1,3 +1,7 @@
+## Spider 아키텍쳐
+![image](https://github.com/KnowckknowcK/Crawling_server/assets/104684033/e35190ff-94b8-4c5a-bbe8-02b57f0441a9)
+
+
 ## 실행방법
 
 ### 환경변수
