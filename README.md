@@ -1,6 +1,16 @@
 ## Spider 아키텍쳐
 ![image](https://github.com/KnowckknowcK/Crawling_server/assets/104684033/e35190ff-94b8-4c5a-bbe8-02b57f0441a9)
 
+<br>
+
+## 기술스택
+언어 및 프레임워크: `Python3.10`, `Scrapy`
+
+주요 라이브러리: `BeautifulSoup`, `trafilatura`, `logging`
+
+인프라: `AWS/EC2`, `Linux Crontab` 
+
+<br>
 
 ## 실행방법
 
